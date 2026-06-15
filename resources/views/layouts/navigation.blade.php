@@ -17,6 +17,25 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('categories.index')">
+                        Categories
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('equipment.index')">
+                        Equipment
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('reservations.index')">
+                        Reservations
+                    </x-nav-link>
+
+                    @if(auth()->user()->role && auth()->user()->role->name === 'admin')
+
+                    <x-nav-link :href="route('admin.users.index')">
+                        Users
+                    </x-nav-link>
+
+                    @endif
                     <a href="{{ route('language.switch', 'lv') }}">
                         LV
                     </a>

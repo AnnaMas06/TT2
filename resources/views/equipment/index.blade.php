@@ -5,6 +5,7 @@
 
     <div class="p-6">
         <a href="{{ route('equipment.create') }}">Add equipment</a>
+        <a href="{{ route('equipment.deleted') }}">Deleted equipment</a>
 
         @if(session('success'))
             <p>{{ session('success') }}</p>
@@ -56,7 +57,7 @@
         </table>
         </div>
     </div>
-    
+
     <script>
     document.getElementById('search').addEventListener('keyup', function () {
 

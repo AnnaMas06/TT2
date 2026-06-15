@@ -63,5 +63,12 @@ Route::patch('/reservations/{reservation}/reject', [ReservationController::class
     ->name('reservations.reject')
     ->middleware(['auth', 'role:admin,staff']);
 
+Route::get('/equipment-deleted', [EquipmentController::class, 'deleted'])
+    ->name('equipment.deleted')
+    ->middleware(['auth', 'role:admin']);
 
+Route::patch('/equipment/{id}/restore', [EquipmentController::class, 'restore'])
+    ->name('equipment.restore')
+    ->middleware(['auth', 'role:admin']);
+    
 require __DIR__.'/auth.php';

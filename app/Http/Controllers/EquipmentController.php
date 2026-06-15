@@ -118,4 +118,21 @@ class EquipmentController extends Controller
 
         return response()->json($equipment);
     }
+    public function deleted()
+    {
+        $equipment = Equipment::onlyTrashed()->get();
+
+        return view('equipment.deleted', compact('equipment'));
+    }
+
+    public function restore($id)
+    {
+        Equipment::onlyTrashed()
+            ->findOrFail($id)
+            ->restore();
+
+        return redirect()
+            ->route('equipment.deleted')
+            ->with('success', 'Equipment restored successfully');
+    }
 }
