@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EquipmentController;
+use App\Http\Controllers\ReservationController;
 
 Route::resource('categories', CategoryController::class)
     ->middleware(['auth', 'role:admin']);
@@ -26,4 +27,15 @@ Route::get('/admin-test', function () {
 
 Route::resource('equipment', EquipmentController::class)
     ->middleware(['auth', 'role:admin']);
+
+Route::resource('reservations', ReservationController::class)
+    ->middleware(['auth']);
+    
+Route::patch('/reservations/{reservation}/approve', [ReservationController::class, 'approve'])
+    ->name('reservations.approve')
+    ->middleware(['auth', 'role:admin,staff']);
+
+Route::patch('/reservations/{reservation}/reject', [ReservationController::class, 'reject'])
+    ->name('reservations.reject')
+    ->middleware(['auth', 'role:admin,staff']);
 require __DIR__.'/auth.php';
