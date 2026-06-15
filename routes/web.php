@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\EquipmentController;
 
+Route::resource('categories', CategoryController::class)
+    ->middleware(['auth', 'role:admin']);
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,4 +24,6 @@ Route::get('/admin-test', function () {
     return 'Admin access granted';
 })->middleware(['auth', 'role:admin']);
 
+Route::resource('equipment', EquipmentController::class)
+    ->middleware(['auth', 'role:admin']);
 require __DIR__.'/auth.php';

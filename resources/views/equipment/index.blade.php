@@ -1,0 +1,50 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2>Equipment</h2>
+    </x-slot>
+
+    <div class="p-6">
+        <a href="{{ route('equipment.create') }}">Add equipment</a>
+
+        @if(session('success'))
+            <p>{{ session('success') }}</p>
+        @endif
+
+        <table border="1" cellpadding="10" style="margin-top:20px;">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Public</th>
+                <th>Actions</th>
+            </tr>
+
+            @foreach($equipment as $item)
+                <tr>
+                    <td>{{ $item->id }}</td>
+                    <td>{{ $item->name }}</td>
+                    <td>{{ $item->category->name }}</td>
+                    <td>{{ $item->status }}</td>
+                    <td>{{ $item->is_public ? 'Yes' : 'No' }}</td>
+
+                    <td>
+                        <a href="{{ route('equipment.show', $item) }}">View</a>
+                        <a href="{{ route('equipment.edit', $item) }}">Edit</a>
+
+                        <form action="{{ route('equipment.destroy', $item) }}"
+                              method="POST"
+                              style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
+</x-app-layout>
