@@ -5,6 +5,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\Admin\UserController;
+
+Route::get('/admin/users', [UserController::class, 'index'])
+    ->name('admin.users.index')
+    ->middleware(['auth', 'role:admin']);
+
+Route::patch('/admin/users/{user}/role', [UserController::class, 'updateRole'])
+    ->name('admin.users.updateRole')
+    ->middleware(['auth', 'role:admin']);
 
 Route::get('/language/{locale}', function ($locale) {
 
@@ -50,4 +59,6 @@ Route::patch('/reservations/{reservation}/approve', [ReservationController::clas
 Route::patch('/reservations/{reservation}/reject', [ReservationController::class, 'reject'])
     ->name('reservations.reject')
     ->middleware(['auth', 'role:admin,staff']);
+
+
 require __DIR__.'/auth.php';
