@@ -15,6 +15,9 @@ Route::patch('/admin/users/{user}/role', [UserController::class, 'updateRole'])
     ->name('admin.users.updateRole')
     ->middleware(['auth', 'role:admin']);
 
+Route::get('/equipment-search', [EquipmentController::class, 'search'])
+    ->name('equipment.search');
+
 Route::get('/language/{locale}', function ($locale) {
 
     if (!in_array($locale, ['lv', 'en'])) {

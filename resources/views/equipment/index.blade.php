@@ -9,6 +9,14 @@
         @if(session('success'))
             <p>{{ session('success') }}</p>
         @endif
+        <div style="margin-bottom:20px;">
+            <input
+                type="text"
+                id="search"
+                placeholder="Search equipment...">
+        </div>
+
+        <div id="equipmentTable">
 
         <table border="1" cellpadding="10" style="margin-top:20px;">
             <tr>
@@ -46,5 +54,48 @@
                 </tr>
             @endforeach
         </table>
+        </div>
     </div>
+    
+    <script>
+    document.getElementById('search').addEventListener('keyup', function () {
+
+        fetch('/equipment-search?search=' + this.value)
+
+            .then(response => response.json())
+
+            .then(data => {
+
+                let html = `
+                    <table border="1" cellpadding="10">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                    </tr>
+                `;
+
+                data.forEach(item => {
+
+                    html += `
+                        <tr>
+                            <td>${item.id}</td>
+                            <td>${item.name}</td>
+                            <td>${item.category.name}</td>
+                            <td>${item.status}</td>
+                        </tr>
+                    `;
+
+                });
+
+                html += '</table>';
+
+                document.getElementById('equipmentTable').innerHTML = html;
+
+            });
+
+    });
+
+    </script>
 </x-app-layout>

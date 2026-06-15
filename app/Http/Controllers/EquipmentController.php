@@ -108,4 +108,14 @@ class EquipmentController extends Controller
         return redirect()->route('equipment.index')
             ->with('success', 'Equipment deleted successfully');
     }
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $equipment = Equipment::where('name', 'like', "%{$search}%")
+            ->with('category')
+            ->get();
+
+        return response()->json($equipment);
+    }
 }
