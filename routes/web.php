@@ -6,6 +6,18 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\ReservationController;
 
+Route::get('/language/{locale}', function ($locale) {
+
+    if (!in_array($locale, ['lv', 'en'])) {
+        abort(400);
+    }
+
+    session(['locale' => $locale]);
+
+    return back();
+
+})->name('language.switch');
+
 Route::resource('categories', CategoryController::class)
     ->middleware(['auth', 'role:admin']);
 Route::get('/', function () {
@@ -30,7 +42,7 @@ Route::resource('equipment', EquipmentController::class)
 
 Route::resource('reservations', ReservationController::class)
     ->middleware(['auth']);
-    
+
 Route::patch('/reservations/{reservation}/approve', [ReservationController::class, 'approve'])
     ->name('reservations.approve')
     ->middleware(['auth', 'role:admin,staff']);
