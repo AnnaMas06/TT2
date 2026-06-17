@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\WeatherController;
 
 Route::get('/admin/users', [UserController::class, 'index'])
     ->name('admin.users.index')
@@ -70,5 +71,8 @@ Route::get('/equipment-deleted', [EquipmentController::class, 'deleted'])
 Route::patch('/equipment/{id}/restore', [EquipmentController::class, 'restore'])
     ->name('equipment.restore')
     ->middleware(['auth', 'role:admin']);
-    
+
+Route::get('/weather', [WeatherController::class, 'index'])
+    ->name('weather.index')
+    ->middleware(['auth']);
 require __DIR__.'/auth.php';

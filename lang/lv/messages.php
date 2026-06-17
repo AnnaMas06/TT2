@@ -16,6 +16,6 @@ return [
 
     'edit' => 'Rediģēt',
 
-    'delete' => 'Dzēst',
+    'delete' => 'Izdzēst',
 
 ];

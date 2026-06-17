@@ -43,6 +43,9 @@
                     <a href="{{ route('language.switch', 'en') }}">
                         EN
                     </a>
+                    <x-nav-link :href="route('weather.index')">
+                        Weather
+                    </x-nav-link>
 
                 </div>
             </div>
