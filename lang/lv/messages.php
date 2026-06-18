@@ -11,6 +11,7 @@ return [
 
     'equipment' => 'Aprīkojums',
     'add_equipment' => 'Pievienot aprīkojumu',
+    'deleted_equipment' => 'Dzēstais aprīkojums',
     'status' => 'Statuss',
     'public' => 'Publisks',
 

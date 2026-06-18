@@ -11,6 +11,7 @@ return [
 
     'equipment' => 'Equipment',
     'add_equipment' => 'Add equipment',
+    'deleted_equipment' => 'Deleted equipment',
     'status' => 'Status',
     'public' => 'Public',
 
