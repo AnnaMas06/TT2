@@ -32,6 +32,8 @@ return [
     'save' => 'Save',
     'cancel' => 'Cancel',
     'search' => 'Search',
+    'approve' => 'Approve',
+    'reject' => 'Reject',
 
     'approved' => 'Approved',
     'pending' => 'Pending',

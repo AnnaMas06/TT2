@@ -32,6 +32,8 @@ return [
     'save' => 'Saglabāt',
     'cancel' => 'Atcelt',
     'search' => 'Meklēt',
+    'approve' => 'Apstiprināt',
+    'reject' => 'Noraidīt',
 
     'approved' => 'Apstiprināta',
     'pending' => 'Gaida',

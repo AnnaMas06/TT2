@@ -1,110 +1,143 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2>Reservations</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('messages.reservations') }}
+        </h2>
     </x-slot>
 
-    <div class="p-6">
+    <div class="py-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-        <a href="{{ route('reservations.create') }}">
-            Create Reservation
-        </a>
+            @if(session('success'))
+                <div class="mb-4 p-4 bg-green-100 text-green-700 rounded">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-        @if(session('success'))
-            <p>{{ session('success') }}</p>
-        @endif
+            <div class="bg-white shadow rounded-lg p-6">
 
-        <table border="1" cellpadding="10" style="margin-top:20px;">
-            <tr>
-                <th>ID</th>
-                <th>Equipment</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800">
+                        {{ __('messages.reservations') }}
+                    </h3>
 
-            @foreach($reservations as $reservation)
+                    <a href="{{ route('reservations.create') }}"
+                       class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700">
+                        {{ __('messages.add_reservation') }}
+                    </a>
+                </div>
 
-                <tr>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full border border-gray-200 rounded">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="px-4 py-3 text-left">ID</th>
+                                <th class="px-4 py-3 text-left">{{ __('messages.equipment') }}</th>
+                                <th class="px-4 py-3 text-left">{{ __('messages.start_date') }}</th>
+                                <th class="px-4 py-3 text-left">{{ __('messages.end_date') }}</th>
+                                <th class="px-4 py-3 text-left">{{ __('messages.status') }}</th>
+                                <th class="px-4 py-3 text-left">{{ __('messages.actions') }}</th>
+                            </tr>
+                        </thead>
 
-                    <td>{{ $reservation->id }}</td>
+                        <tbody>
+                            @foreach($reservations as $reservation)
+                                <tr class="border-t">
+                                    <td class="px-4 py-3">{{ $reservation->id }}</td>
 
-                    <td>{{ $reservation->equipment->name }}</td>
+                                    <td class="px-4 py-3">
+                                        {{ $reservation->equipment->name }}
+                                    </td>
 
-                    <td>{{ $reservation->start_date }}</td>
+                                    <td class="px-4 py-3">
+                                        {{ $reservation->start_date }}
+                                    </td>
 
-                    <td>{{ $reservation->end_date }}</td>
+                                    <td class="px-4 py-3">
+                                        {{ $reservation->end_date }}
+                                    </td>
 
-                    <td>{{ $reservation->status }}</td>
+                                    <td class="px-4 py-3">
+                                        @if($reservation->status === 'pending')
+                                            <span class="px-2 py-1 text-xs rounded bg-yellow-100 text-yellow-700">
+                                                {{ __('messages.pending') }}
+                                            </span>
+                                        @elseif($reservation->status === 'approved')
+                                            <span class="px-2 py-1 text-xs rounded bg-green-100 text-green-700">
+                                                {{ __('messages.approved') }}
+                                            </span>
+                                        @else
+                                            <span class="px-2 py-1 text-xs rounded bg-red-100 text-red-700">
+                                                {{ __('messages.rejected') }}
+                                            </span>
+                                        @endif
+                                    </td>
 
-                    <td>
+                                    <td class="px-4 py-3 space-x-2">
 
-                        <a href="{{ route('reservations.show', $reservation) }}">
-                            View
-                        </a>
+                                        <a href="{{ route('reservations.show', $reservation) }}"
+                                           class="text-blue-600 hover:underline">
+                                            {{ __('messages.view') }}
+                                        </a>
 
-                        @if($reservation->status === 'pending')
+                                        @if($reservation->status === 'pending')
+                                            <a href="{{ route('reservations.edit', $reservation) }}"
+                                               class="text-green-600 hover:underline">
+                                                {{ __('messages.edit') }}
+                                            </a>
 
-                            <a href="{{ route('reservations.edit', $reservation) }}">
-                                Edit
-                            </a>
+                                            <form action="{{ route('reservations.destroy', $reservation) }}"
+                                                  method="POST"
+                                                  class="inline">
+                                                @csrf
+                                                @method('DELETE')
 
-                            <form
-                                action="{{ route('reservations.destroy', $reservation) }}"
-                                method="POST"
-                                style="display:inline;">
+                                                <button type="submit"
+                                                        class="text-red-600 hover:underline">
+                                                    {{ __('messages.cancel') }}
+                                                </button>
+                                            </form>
+                                        @endif
 
-                                @csrf
-                                @method('DELETE')
+                                        @if(auth()->user()->role &&
+                                            in_array(auth()->user()->role->name, ['admin', 'staff']) &&
+                                            $reservation->status === 'pending')
 
-                                <button type="submit">
-                                    Cancel
-                                </button>
+                                            <form action="{{ route('reservations.approve', $reservation) }}"
+                                                  method="POST"
+                                                  class="inline">
+                                                @csrf
+                                                @method('PATCH')
 
-                            </form>
+                                                <button type="submit"
+                                                        class="text-green-700 hover:underline">
+                                                    {{ __('messages.approve') }}
+                                                </button>
+                                            </form>
 
-                        @endif
-                        @if(auth()->user()->role &&
-                            in_array(auth()->user()->role->name, ['admin', 'staff']) &&
-                            $reservation->status === 'pending')
+                                            <form action="{{ route('reservations.reject', $reservation) }}"
+                                                  method="POST"
+                                                  class="inline">
+                                                @csrf
+                                                @method('PATCH')
 
-                            <form
-                                action="{{ route('reservations.approve', $reservation) }}"
-                                method="POST"
-                                style="display:inline;">
+                                                <button type="submit"
+                                                        class="text-red-700 hover:underline">
+                                                    {{ __('messages.reject') }}
+                                                </button>
+                                            </form>
+                                        @endif
 
-                                @csrf
-                                @method('PATCH')
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
 
-                                <button type="submit">
-                                    Approve
-                                </button>
+                    </table>
+                </div>
 
-                            </form>
+            </div>
 
-                            <form
-                                action="{{ route('reservations.reject', $reservation) }}"
-                                method="POST"
-                                style="display:inline;">
-
-                                @csrf
-                                @method('PATCH')
-
-                                <button type="submit">
-                                    Reject
-                                </button>
-
-                            </form>
-
-                        @endif
-
-                    </td>
-
-                </tr>
-
-            @endforeach
-
-        </table>
-
+        </div>
     </div>
 </x-app-layout>
