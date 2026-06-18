@@ -12,7 +12,7 @@
             <tr>
                 <th>ID</th>
                 <th>{{ __('messages.name') }}</th>
-                <th>{{ __('messages.email') }}</th>
+                <th>Email</th>
                 <th>{{ __('messages.current_role') }}</th>
                 <th>{{ __('messages.change_role') }}</th>
             </tr>
