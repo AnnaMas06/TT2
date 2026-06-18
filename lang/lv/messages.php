@@ -39,6 +39,8 @@ return [
     'search' => 'Meklēt',
     'approve' => 'Apstiprināt',
     'reject' => 'Noraidīt',
+    'profile' => 'Profils',
+    'logout' => 'Izrakstīties',
 
     'user_management' => 'Lietotāju pārvaldība',
     'current_role' => 'Pašreizējā loma',

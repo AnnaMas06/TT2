@@ -39,6 +39,8 @@ return [
     'search' => 'Search',
     'approve' => 'Approve',
     'reject' => 'Reject',
+    'profile' => 'Profile',
+    'logout' => 'Log Out',
 
     'user_management' => 'User Management',
     'current_role' => 'Current Role',
