@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2>User Management</h2>
+        <h2>{{ __('messages.user_management') }}</h2>
     </x-slot>
 
     <div class="p-6">
@@ -11,10 +11,10 @@
         <table border="1" cellpadding="10">
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Current Role</th>
-                <th>Change Role</th>
+                <th>{{ __('messages.name') }}</th>
+                <th>{{ __('messages.email') }}</th>
+                <th>{{ __('messages.current_role') }}</th>
+                <th>{{ __('messages.change_role') }}</th>
             </tr>
 
             @foreach($users as $user)
@@ -37,7 +37,7 @@
                                 @endforeach
                             </select>
 
-                            <button type="submit">Update</button>
+                            <button type="submit">{{ __('messages.update') }}</button>
                         </form>
                     </td>
                 </tr>

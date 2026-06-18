@@ -26,6 +26,9 @@ return [
     'role' => 'Loma',
 
     'weather' => 'Laikapstākļi',
+    'temperature' => 'Temperatūra',
+    'condition' => 'Laikapstākļi',
+    'humidity' => 'Mitrums',
 
     'view' => 'Skatīt',
     'edit' => 'Rediģēt',
@@ -36,6 +39,12 @@ return [
     'search' => 'Meklēt',
     'approve' => 'Apstiprināt',
     'reject' => 'Noraidīt',
+
+    'user_management' => 'Lietotāju pārvaldība',
+    'current_role' => 'Pašreizējā loma',
+    'change_role' => 'Mainīt lomu',
+    'no_role' => 'Nav lomas',
+    'update' => 'Atjaunināt',
 
     'approved' => 'Apstiprināta',
     'pending' => 'Gaida',
