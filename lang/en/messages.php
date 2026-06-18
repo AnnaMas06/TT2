@@ -2,7 +2,7 @@
 
 return [
 
-    'categories' => 'Categories',
+    'categories' => 'Categoriess',
 
     'add_category' => 'Add Category',
 
