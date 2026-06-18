@@ -17,10 +17,12 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('categories.index')">
-                        Categories
-                    </x-nav-link>
-
+                    @if(auth()->user()->role && auth()->user()->role->name === 'admin')
+                        <x-nav-link :href="route('categories.index')">
+                            Categories
+                        </x-nav-link>
+                    @endif
+                    
                     <x-nav-link :href="route('equipment.index')">
                         Equipment
                     </x-nav-link>

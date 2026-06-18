@@ -51,7 +51,7 @@ Route::get('/admin-test', function () {
 })->middleware(['auth', 'role:admin']);
 
 Route::resource('equipment', EquipmentController::class)
-    ->middleware(['auth', 'role:admin']);
+    ->middleware(['auth']);
 
 Route::resource('reservations', ReservationController::class)
     ->middleware(['auth']);
