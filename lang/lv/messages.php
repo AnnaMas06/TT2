@@ -2,6 +2,8 @@
 
 return [
     'dashboard' => 'Vadības panelis',
+    'login' => 'Pieteikties',
+    'register' => 'Reģistrēties',
 
     'categories' => 'Kategorijas',
     'add_category' => 'Pievienot kategoriju',

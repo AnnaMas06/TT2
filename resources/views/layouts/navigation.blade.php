@@ -14,27 +14,27 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
 
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('messages.dashboard') }}
                     </x-nav-link>
 
                     @if(auth()->user()->role && auth()->user()->role->name === 'admin')
                         <x-nav-link :href="route('categories.index')">
-                            Categories
+                            {{ __('messages.categories') }}
                         </x-nav-link>
                     @endif
-                    
+
                     <x-nav-link :href="route('equipment.index')">
-                        Equipment
+                        {{ __('messages.equipment') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('reservations.index')">
-                        Reservations
+                        {{ __('messages.reservations') }}
                     </x-nav-link>
 
                     @if(auth()->user()->role && auth()->user()->role->name === 'admin')
 
                     <x-nav-link :href="route('admin.users.index')">
-                        Users
+                        {{ __('messages.users') }}
                     </x-nav-link>
 
                     @endif
@@ -46,7 +46,7 @@
                         EN
                     </a>
                     <x-nav-link :href="route('weather.index')">
-                        Weather
+                        {{ __('messages.weather') }}
                     </x-nav-link>
 
                 </div>
@@ -69,7 +69,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('messages.profile') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -79,7 +79,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('messages.logout') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -102,7 +102,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('messages.dashboard') }}
             </x-responsive-nav-link>
         </div>
 
@@ -115,7 +115,7 @@
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{ __('messages.profile') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -125,7 +125,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('messages.logout') }}
                     </x-responsive-nav-link>
                 </form>
             </div>

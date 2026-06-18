@@ -2,6 +2,8 @@
 
 return [
     'dashboard' => 'Dashboard',
+    'login' => 'Login',
+    'register' => 'Register',
 
     'categories' => 'Categories',
     'add_category' => 'Add new category',
