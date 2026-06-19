@@ -31,7 +31,9 @@
                     <table class="min-w-full border border-gray-200 rounded">
                         <thead class="bg-gray-100">
                             <tr>
-                                <th class="px-4 py-3 text-left">ID</th>
+                                @if(auth()->user()->role && auth()->user()->role->name === 'admin')
+                                    <th>ID</th>
+                                @endif
                                 <th class="px-4 py-3 text-left">
                                     {{ __('messages.name') }}
                                 </th>
@@ -47,9 +49,11 @@
                         <tbody>
                             @foreach($categories as $category)
                                 <tr class="border-t">
-                                    <td class="px-4 py-3">
-                                        {{ $category->id }}
-                                    </td>
+                                    @if(auth()->user()->role && auth()->user()->role->name === 'admin')
+                                        <td class="px-4 py-3">
+                                            {{ $category->id }}
+                                        </td>
+                                    @endif
 
                                     <td class="px-4 py-3">
                                         {{ $category->name }}
